@@ -145,7 +145,7 @@ class Solver(object):
                 move_new_ind = cur[1][2].copy()  # indices of blank
                 check = move(cur_move, move_new, move_new_ind)  # create a new state of the board. If not possible, check is False
                 if check and str(move_new) not in visited:  # if move is possible and gives us a new state
-                    num = 0  # will be the priority—used the heuristic from https://blog.goodaudience.com/solving-8-puzzle-using-a-algorithm-7b509c331288
+                    num = 0  # will be the priority
                     for a in range(N):
                         for b in range(N):
                             if move_new[a, b] != 0:
@@ -163,7 +163,7 @@ class Solver(object):
             else:
                 cur = heapq.heappop(queue)  # update cur
 
-    def BFS(self):
+    def Dijkstra(self):  
         cur1 = self.game.get_board()  # cur1 is the current array
         cur2 = self.game.indices  # cur2 is the current location of the blank
         cur = (cur1, cur2, None)  # cur[2] will store parent
@@ -224,7 +224,7 @@ class Solver(object):
                 move_new_ind = cur[1][2].copy()  # indices of blank
                 check = move(cur_move, move_new, move_new_ind)  # create a new state of the board. If not possible, check is False
                 if check and str(move_new) not in visited:  # if move is possible and gives us a new state
-                    num = 0  # will be the priority—used the heuristic from https://blog.goodaudience.com/solving-8-puzzle-using-a-algorithm-7b509c331288
+                    num = 0 
                     for a in range(N):
                         for b in range(N):
                             if move_new[a, b] != 0:
@@ -243,11 +243,7 @@ class Solver(object):
 def main():
     p = Puzzle()
     s = Solver(p)
-    # s.A_Star()
-    # s.BFS()
     s.GBFS()
-    # I found that Greedy Best First Search works very quickly, but doesn't find the fastest solution. It can do 4x4's and 5x5's fairly quickly.
-    # A* works much faster than Dijkstra, but not as fast as Greedy Best First Search. I think that there is a minor bug in my implementation though. The vast majority of the time it finds the fastest solution, but sometimes it takes 2 extra moves.
 
 
 
